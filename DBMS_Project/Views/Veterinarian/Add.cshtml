@@ -1,0 +1,56 @@
+﻿@model VeterinarianViewModel
+
+@{
+	ViewData["Title"] = "Add Page";
+
+}
+
+<h2>Add Veterinarian</h2>
+
+<form asp-controller="Veterinarian" asp-action="Add" method="post">
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="FirstName" class="form-label">First Name</label>
+		<input asp-for="FirstName" class="form-control" placeholder="Ignatius">
+		<span asp-validation-for="FirstName" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="LastName" class="form-label">Last Name</label>
+		<input asp-for="LastName" class="form-control" placeholder="Sandifer">
+		<span asp-validation-for="LastName" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="PhoneNo" class="form-label">Phone Number</label>
+		<input asp-for="PhoneNo" class="form-control" placeholder="0-536-386-5844">
+		<span asp-validation-for="PhoneNo" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="EmailAddress" class="form-label">Email Address</label>
+		<input asp-for="EmailAddress" class="form-control" placeholder="isandifer3@salon.com">
+		<span asp-validation-for="EmailAddress" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="Address" class="form-label">Address</label>
+		<input asp-for="Address" class="form-control" placeholder="859 Sauthoff Point">
+		<span asp-validation-for="Address" class="text-danger"></span>
+	</div>
+	@* Checkbox for Animal Types*@
+	<div class="mb-3 ms-5 me-5">
+		<div>
+			<label>Select Specialization(s)</label>
+			<br />
+			@for (int i = 0; i < Model.Specializations.Count; i++)
+			{
+				@Html.CheckBoxFor(Model => Model.Specializations[i].IsChecked)
+				<label>@Model.Specializations[i].Name</label>
+				@Html.HiddenFor(Model => Model.Specializations[i].Id)
+				@Html.HiddenFor(Model => Model.Specializations[i].Name)
+				<br />
+			}
+			<span asp-validation-for="Specializations" class="text-danger"></span>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary ms-5 me-5">Add</button>
+	<button class="btn btn-danger" asp-action="List" asp-controller="Veterinarian">Cancel</button>
+</form>
+
+

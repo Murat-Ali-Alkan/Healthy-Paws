@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Welcome to Healthy Paws";
+}
+
+<div class="text-center my-5">
+    <h1 class="display-4">Welcome to Healthy Paws Veterinary Clinic</h1>
+    <p class="lead">Your trusted partner for animal health and well-being.</p>
+</div>
+
+<div class="row">
+    <div class="justify-content-center">
+        <h2 style="text-align:center">About Us</h2>
+        <p>
+            At Healthy Paws, we are dedicated to providing top-notch care for your beloved pets and farm animals.
+            Our team of experienced veterinarians specializes in a variety of fields, from pet care to farm animal health,
+            ensuring the best treatment and advice tailored to your animal’s needs.
+        </p>
+        <p>
+            Whether it’s a routine consultation, vaccinations, or advanced treatments, we are here to help your animals
+            live a healthy and happy life. Trust us for compassionate care that makes a difference.
+        </p>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<div class="row text-center">
+    <div class="col-md-4">
+        <h3>Consultations</h3>
+        <p>Visit our expert veterinarians to address your pet's health concerns.</p>
+    </div>
+    <div class="col-md-4">
+        <h3>Prescriptions</h3>
+        <p>We provide tailored treatments and medicines to ensure the well-being of your animals.</p>
+    </div>
+    <div class="col-md-4">
+        <h3>Animal Products</h3>
+        <p>Explore a wide range of quality animal food and supplements available at our clinic.</p>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<div class="text-center">
+    <a class="btn btn-primary btn-lg"  asp-controller="Veterinarian" asp-action="List">Meet Our Veterinarians</a>
+    <a class="btn btn-secondary btn-lg"  asp-controller="Product" asp-action="List">Browse Our Products</a>
+</div>

@@ -1,0 +1,104 @@
+﻿@model List<Product>
+
+@{
+	ViewData["Title"] = "List Page";
+}
+
+@if (ViewBag.CompanyName != null)
+{
+	<h2>@(ViewBag.CompanyName)'s Products</h2>
+	<br />
+	<a asp-controller="Company" asp-action="List" class="btn btn-info">Back To Companies</a>
+	<a asp-controller="Product" asp-action="List" class="btn btn-info">All Products</a>
+
+	<br />
+
+	if (ViewBag.Exception != null)
+	{
+		<h3>@ViewBag.Exception</h3>
+	}
+
+	string GetFullType(char productType)
+	{
+		if (productType == 'M')
+			return "Medicine";
+		else
+			return "Food";
+	}
+
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Product Type</th>
+			</tr>
+		</thead>
+		<tbody class="table-group-divider">
+			@foreach (var product in Model)
+			{
+				<tr>
+					<td>@product.Name</td>
+					<td>@product.Price&#8378</td>
+					<td>@GetFullType(product.ProductType)</td>
+					<td>
+						<a asp-controller="Purchase" asp-action="MakePurchase" class="btn btn-outline-secondary" asp-route-companyId="@ViewBag.CompanyId" asp-route-productId="@product.ProductId">Make Purchase</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h2>Products</h2>
+
+	if (User.IsInRole("Admin"))
+	{
+		<br />
+		<a asp-controller="Product" asp-action="Add" class="btn btn-primary" asp-route-productType="M">Add Medicine</a>
+		<a asp-controller="Product" asp-action="Add" class="btn btn-primary" asp-route-productType="F">Add Food</a>
+	}
+
+
+
+
+	<br />
+
+	string GetFullType(char productType)
+	{
+		if (productType == 'M')
+			return "Medicine";
+		else
+			return "Food";
+	}
+
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Product Type</th>
+			</tr>
+		</thead>
+		<tbody class="table-group-divider">
+			@foreach (var product in Model)
+			{
+				<tr>
+					<td>@product.Name</td>
+					<td>@product.Price&#8378</td>
+					<td>@GetFullType(product.ProductType)</td>
+					@if (User.IsInRole("Admin"))
+					{
+						<td><a class="btn btn-info" asp-action="Update" asp-controller="Product" asp-route-productId="@product.ProductId">Change Price</a></td>
+					}
+				</tr>
+			}
+		</tbody>
+	</table>
+
+
+}
+
+
+

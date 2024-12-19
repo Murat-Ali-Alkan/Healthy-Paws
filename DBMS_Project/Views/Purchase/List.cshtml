@@ -1,0 +1,39 @@
+﻿@model List<Purchase>
+
+@{
+	ViewData["Title"] = "List Page";
+}
+
+
+<h2>Purchases</h2>
+
+<br />
+
+
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Company Name</th>
+			<th>Product Name</th>
+			<th>Purchase Date</th>
+			<th>Arrival Date</th>
+			<th>Quantity</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<tbody class="table-group-divider">
+		@foreach (var purchase in Model)
+		{
+			<tr>
+				<td>@purchase.Company.Name</td>
+				<td>@purchase.Product.Name</td>
+				<td>@purchase.PurchaseDate</td>
+				<td>@purchase.ArrivalDate </td>
+				<td>@purchase.Quantity</td>
+				<td>@purchase.Price&#8378</td>
+			</tr>
+
+		}
+	</tbody>
+</table>

@@ -1,0 +1,94 @@
+﻿@model ProductViewModel
+
+@{
+	ViewData["Title"] = $"{ViewBag.Action} Page";
+
+}
+
+<h2>@ViewBag.Action</h2>
+@* General Form Part For Product*@
+<form asp-controller="Product" asp-action="Add" method="post">
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="Name" class="form-label">Product Name</label>
+		<input asp-for="Name" class="form-control" placeholder="Purminerals SPF 15 Blush Medium">
+		<span asp-validation-for="Name" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="Price" class="form-label">Price</label>
+		<input asp-for="Price" class="form-control" placeholder="20">
+		<span asp-validation-for="Price" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		@{
+			// Form Part For Medicines (if they are selected)
+			if (ViewBag.ProductType == 'M')
+			{
+				<div>
+					<label asp-for="Dosage" class="form-label">Dosage</label>
+					<input asp-for="Dosage" class="form-control" placeholder="100">
+					<span asp-validation-for="Dosage" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="UsageInstruction" class="form-label">Usage Instruction</label>
+					<input asp-for="UsageInstruction" class="form-control" placeholder="Shake well before serving">
+					<span asp-validation-for="UsageInstruction" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="MedicineCategoryId" class="form-label">Medicine Category</label>
+					<select asp-for="MedicineCategoryId" class="form-control">
+						<option value="">-- Select Medicine Category --</option>
+						@foreach (MedicineCategory medicineCategory in ViewBag.MedicineCategories)
+						{
+							<option value="@medicineCategory.Id">@medicineCategory.Category</option>
+						}
+					</select>
+					<span asp-validation-for="MedicineCategoryId" class="text-danger"></span>
+				</div>
+			}
+			// Form Part For Foods (if they are selected
+			else
+			{
+				<div>
+					<label asp-for="Calorie" class="form-label">Calorie</label>
+					<input asp-for="Calorie" class="form-control" placeholder="200">
+					<span asp-validation-for="Calorie" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="Weight" class="form-label">Weight</label>
+					<input asp-for="Weight" class="form-control" placeholder="1000">
+					<span asp-validation-for="Weight" class="text-danger"></span>
+				</div>
+				<div>
+					<label asp-for="IsDry" class="form-label">Texture</label>
+					<select asp-for="IsDry" class="form-control">
+						<option value="">-- Select Texture --</option>
+						<option value="@true">Dry</option>
+						<option value="@false">Wet</option>
+					</select>
+					<span asp-validation-for="IsDry" class="text-danger"></span>
+				</div>
+			}
+
+			@* Checkbox for Animal Types*@
+			<div>
+				<label>Select Animal Type(s)</label>
+				<br />
+				@for(int i =0; i< Model.AnimalTypes.Count; i++)
+				{
+					@Html.CheckBoxFor(Model => Model.AnimalTypes[i].IsChecked)
+					<label>@Model.AnimalTypes[i].SpeciesName</label>
+					@Html.HiddenFor(Model => Model.AnimalTypes[i].Id)
+					@Html.HiddenFor(Model => Model.AnimalTypes[i].SpeciesName)
+					<br />
+				}
+				<span asp-validation-for="@Model.AnimalTypes" class="text-danger"></span>
+			</div>
+					
+		}
+	</div>
+	<input hidden asp-for="ProductType" value="@ViewBag.ProductType" />
+	<button type="submit" class="btn btn-primary ms-5 me-5">Add</button>
+	<button class="btn btn-danger" asp-action="List" asp-controller="Product">Cancel</button>
+</form>
+
+

@@ -1,0 +1,66 @@
+﻿@model CustomerViewModel
+
+@{
+	ViewData["Title"] = "Add Page";
+
+}
+
+<h2>Add Customer</h2>
+
+<form asp-controller="Customer" asp-action="Add" method="post">
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="FirstName" class="form-label">First Name</label>
+		<input asp-for="FirstName" class="form-control" placeholder="Ignatius">
+		<span asp-validation-for="FirstName" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="LastName" class="form-label">Last Name</label>
+		<input asp-for="LastName" class="form-control" placeholder="Sandifer">
+		<span asp-validation-for="LastName" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="PhoneNo" class="form-label">Phone Number</label>
+		<input asp-for="PhoneNo" class="form-control" placeholder="0-536-386-5844">
+		<span asp-validation-for="PhoneNo" class="text-danger"></span>
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="EmailAddress" class="form-label">Email Address</label>
+		<input asp-for="EmailAddress" class="form-control" placeholder="isandifer3@salon.com">
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="Address" class="form-label">Address</label>
+		<input asp-for="Address" class="form-control" placeholder="859 Sauthoff Point">
+	</div>
+	<div class="mb-3 ms-5 me-5">
+		<label asp-for="VillageId" class="form-label">Village</label>
+		<select asp-for="VillageId" class="form-control">
+			<option value="">-- Select Village --</option>
+			@foreach (Village village in ViewBag.Villages)
+			{
+				<option value="@village.Id">@village.Name</option>
+			}
+		</select>
+		<span asp-validation-for="VillageId" class="text-danger"></span>
+	</div>
+
+	@* Checkbox for Animal Types*@
+	<div class="mb-3 ms-5 me-5">
+		<div>
+			<label>Select Veterinarian(s)</label>
+			<br />
+			@for (int i = 0; i < Model.Veterinarians.Count; i++)
+			{
+				@Html.CheckBoxFor(Model => Model.Veterinarians[i].IsChecked)
+				<label>@Model.Veterinarians[i].FirstName @Model.Veterinarians[i].LastName</label>
+				@Html.HiddenFor(Model => Model.Veterinarians[i].Id)
+				@Html.HiddenFor(Model => Model.Veterinarians[i].FirstName)
+				<br />
+			}
+			<span asp-validation-for="Veterinarians" class="text-danger"></span>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary ms-5 me-5">Add</button>
+	<button class="btn btn-danger" asp-action="List" asp-controller="Customer">Cancel</button>
+</form>
+
+

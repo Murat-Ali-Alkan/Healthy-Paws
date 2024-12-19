@@ -1,0 +1,73 @@
+﻿@model List<Veterinarian>
+
+@{
+    ViewData["Title"] = "List Page";
+}
+
+
+
+@if (ViewBag.CustomerName != null)
+{
+    <h2>@(ViewBag.CustomerName)'s Veterinarians</h2>
+
+    <br />
+
+    <a asp-controller="Customer" asp-action="List" class="btn btn-info">Back To Customers</a>
+    <a asp-controller="Veterinarian" asp-action="List" class="btn btn-info">See All Veterinarians</a>
+    <br />
+}
+else
+{
+    <h2>Veterinarians</h2>
+
+
+    @if(User.IsInRole("Admin"))
+    {
+        <br />
+
+        <a asp-controller="Veterinarian" asp-action="Add" class="btn btn-primary">Add Veterinarian</a>
+    }
+    
+
+    <br />
+}
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            @if(User.Identity.IsAuthenticated)
+            {
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Address</th>
+                <th>Registration Date</th>
+            }
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach (var veterinarian in Model)
+        {
+            <tr>
+                <td>@veterinarian.FirstName</td>
+                <td>@veterinarian.LastName</td>
+
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <td>@veterinarian.PhoneNo</td>
+                    <td>@veterinarian.EmailAddress</td>
+                    <td>@veterinarian.Address</td>
+                    <td>@veterinarian.RegistrationDate</td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td><a asp-controller="Veterinarian" asp-action="ListCustomers" class="btn btn-info" asp-route-veterinarianId="@veterinarian.Id">See Customers</a></td>
+                    }
+                }
+            </tr>
+            
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,43 @@
+﻿@model List<Stock>
+
+@{
+    ViewData["Title"] = "List Page";
+}
+
+
+<h2>Stock</h2>
+
+<br />
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Type</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Expiration Date</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach (var stock in Model)
+        {
+            <tr>
+                <td>@stock.Product.Name</td>
+                <td>@(stock.Product.ProductType == 'F' ? "Food" : "Medicine")</td>
+                <td>@stock.Quantity</td>
+                <td>@stock.Product.Price&#8378</td>
+                <td>@stock.ExpirationDate</td>
+                @if (stock.ExpirationDate > DateOnly.FromDateTime(DateTime.UtcNow.Date) && stock.Quantity > 0)
+                {
+                    <td><a asp-controller="Sale" asp-action="Sell" class="btn btn-primary" asp-route-stockId="@stock.Id">Sell</a></td>
+                }
+                else
+                {
+                    <td><a asp-controller="Stock" asp-action="Delete" class="btn btn-danger" asp-route-stockId="@stock.Id">Remove From Shelves</a></td>
+                }
+            </tr>
+
+        }
+    </tbody>
+</table>

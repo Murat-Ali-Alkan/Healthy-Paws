@@ -1,0 +1,52 @@
+﻿@model Stock
+
+
+@{
+	ViewData["Title"] = "Sale Page";
+}
+
+<h2 class="mb-5">Product Details</h2>
+
+<ul class="list-group mb-3 ms-5 me-5">
+    <li class="list-group-item"><b>Product Name :</b> @Model.Product.Name </li>
+    <li class="list-group-item"><b>Product Type :</b>@(Model.Product.ProductType == 'F' ? "Food" : "Medicine")</li>
+    <li class="list-group-item"><b>Unit Price :</b> @Model.Product.Price </li>
+    <li class="list-group-item"><b>Quantity :</b> @Model.Quantity </li>
+</ul>
+
+@if(ViewBag.NotEnoughStock != null)
+{
+    <p class="text-danger">@ViewBag.NotEnoughStock</p>
+}
+
+<div class="mb-3 ms-5 me-5">
+    <form asp-controller="Sale" asp-action="Sell" method="post" class="mt-4">
+        
+
+        <div class="form-group ">
+            <label asp-for="Quantity">Quantity</label>
+            <input type="number" class="form-control" asp-for="Quantity" min="1" max="@Model.Quantity" value="1" id="input_quantity" onchange="updatePrice()" required />
+        </div>
+
+        <div class="form-group">
+            <label for="total_price">Total Price</label>
+            <p id="total_price" class="form-control-plaintext">@Model.Product.Price TL</p>
+        </div>
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-primary mt-3">Sell</button>
+        <a asp-action="List" asp-controller="Stock" class="btn btn-danger mt-3">Cancel</a>
+    </form>
+</div>
+
+<script>
+    function updatePrice() { 
+        var quantity = document.getElementById("input_quantity").value;
+
+        const unitPrice = @Model.Product.Price;
+
+        const totalPrice = quantity * unitPrice;
+
+        document.getElementById("total_price").textContent = totalPrice.toFixed(2) +"TL";
+    }
+
+</script>

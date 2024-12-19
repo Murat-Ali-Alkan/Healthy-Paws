@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - Healthy Paws</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom shadow-sm mb-3">
+			<div class="container-fluid">
+				<a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">Healthy Paws</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-controller="Product" asp-action="List">Products</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-controller="Veterinarian" asp-action="List">Veterinarians</a>
+						</li>
+						@if (User.Identity.IsAuthenticated)
+						{
+							@if (User.IsInRole("Admin"))
+							{
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Customer" asp-action="List">Customers</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Company" asp-action="List">Companies</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Purchase" asp-action="List">Purchases</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Sale" asp-action="List">Sales</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-dark" asp-controller="Stock" asp-action="List">Stock</a>
+								</li>
+							}
+						}
+						@if (SignInManager.IsSignedIn(User))
+						{
+							<li class="nav-item ms-auto me-5">
+								<a class="nav-link justify-content-end" asp-controller="Account" asp-action="Logout">Logout</a>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item ms-auto">
+								<a class="nav-link" asp-action="Login" asp-controller="Account">Login</a>
+							</li>
+							<li class="nav-item me-5">
+								<a class="nav-link" asp-action="Register" asp-controller="Account">Register</a>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted mt-4">
+		<div class="container text-center">
+			<p class="mb-0">&copy; 2024 - Healthy Paws Veterinary Clinic - Murat Ali Alkan B221202003</p>
+		</div>
+		@RenderSection("scripts", false)
+	</footer>
+</body>
+</html>

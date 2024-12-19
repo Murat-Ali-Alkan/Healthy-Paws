@@ -1,0 +1,46 @@
+﻿@model Product
+
+@{
+	ViewData["Title"] = "Update Page";
+}
+
+<h2 class="mb-5">Product Details</h2>
+
+<ul class="list-group mb-3 ms-5 me-5">
+	<li class="list-group-item"><b>Product Name :</b> @Model.Name </li>
+	<li class="list-group-item"><b>Product Type :</b> @(Model.ProductType == 'F' ? "Food" : "Medicine")</li>
+	@if(Model.ProductType == 'F')
+	{
+		<li class="list-group-item"><b>Calorie :</b> @Model.Food.Calorie</li>
+		<li class="list-group-item"><b>Weight :</b> @Model.Food.Weight</li>
+		@if(Model.Food.IsDry == false)
+		{
+			<li class="list-group-item"><b>Texture :</b> Wet</li>
+		}
+		else
+		{
+			<li class="list-group-item"><b>Texture :</b> Dry</li>
+		}
+	}
+	else
+	{
+		<li class="list-group-item"><b>Medicine Category :</b> @Model.Medicine.MedicineCategory.Category</li>
+		<li class="list-group-item"><b>Usage Instruction :</b> @Model.Medicine.UsageInstruction</li>
+		<li class="list-group-item"><b>Dosage :</b> @Model.Medicine.Dosage cc</li>
+	}
+
+</ul>
+
+
+
+<form class="mb-3 ms-5 me-5 mt-4" asp-controller="Product" asp-action="Update" method="post">
+	<div class="mb-3  ">
+		<label asp-for="Price" class="form-label">Price</label>
+		<input asp-for="Price" class="form-control" value="@Model.Price">
+		<span asp-validation-for="Price" class="text-danger"></span>
+
+		<input type="hidden" asp-for="@Model.ProductId" value="@Model.ProductId" />
+	</div>
+	<button type="submit" class="btn btn-primary">Save</button>
+	<a asp-action="List" asp-controller="Product" class="btn btn-danger">Cancel</a>
+</form>

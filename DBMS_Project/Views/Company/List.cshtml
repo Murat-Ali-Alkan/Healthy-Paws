@@ -1,0 +1,40 @@
+﻿@model List<Company>
+
+@{
+    ViewData["Title"] = "List Page";
+}
+
+
+<h2>Companies</h2>
+
+<br />
+
+<a asp-controller="Company" asp-action="Add" class="btn btn-primary">Add Company</a>
+
+<br />
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email Address</th>
+            <th>Address</th>
+            <th>Tax Number</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach (var company in Model)
+        {
+            <tr>
+                <td>@company.Name</td>
+                <td>@company.PhoneNo</td>
+                <td>@(company.EmailAddress ?? "<NULL>")</td>
+                <td>@(company.Address ?? "<NULL>") </td>
+                <td>@company.TaxNumber</td>
+                <td><a asp-controller="Company" asp-action="ListProducts" class="btn btn-info" asp-route-companyId="@company.Id">See Products</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
