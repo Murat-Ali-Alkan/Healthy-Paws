@@ -49,7 +49,7 @@ Aşağıda Healthy Paws sisteminin veritabanı ilişkilerini gösteren ER diyagr
 1. **Depoyu Klonlayın:**
 
    ```bash
-   git clone https://github.com/yourusername/healthy-paws.git
+   git clone https://github.com/Murat-Ali-Alkan/Healthy-Paws.git
    cd healthy-paws
    ```
 
