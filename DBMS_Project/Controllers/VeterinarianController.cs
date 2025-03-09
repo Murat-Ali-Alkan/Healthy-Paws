@@ -1,10 +1,10 @@
-﻿using DBMS_Project.Data;
-using DBMS_Project.Models;
+﻿using DBMS_Project.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Web.Data;
 
 namespace DBMS_Project.Controllers
 {

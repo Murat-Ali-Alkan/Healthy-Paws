@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DBMS_Project.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DBMS_Project.Data;
+namespace Web.Data;
 
 public partial class HealthyPawsContext : DbContext
 {

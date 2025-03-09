@@ -1,8 +1,8 @@
-using DBMS_Project.Data;
 using DBMS_Project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using System.Diagnostics;
+using Web.Data;
 
 namespace DBMS_Project.Controllers
 {

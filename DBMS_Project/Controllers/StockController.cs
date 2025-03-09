@@ -1,7 +1,7 @@
-﻿using DBMS_Project.Data;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Web.Data;
 
 namespace DBMS_Project.Controllers
 {

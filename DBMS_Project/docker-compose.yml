@@ -1,0 +1,31 @@
+services:
+  webapp:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__HealtyPawsWebConnection=Host=db;Port=5432;Database=HealthyPawsWeb;Username=postgres;Password=123456789
+      - ConnectionStrings__IdentityDBConnection=Data Source=/app/data/identityDB.db
+    volumes:
+      - ./identityDB.db:/app/data/identityDB.db
+    restart: always
+
+  db:
+    image: postgres:17.3
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_DB: HealthyPawsWeb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456789
+    ports:
+      - "6543:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./HealthyPaws.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres_data:
+  sqlite-data:  

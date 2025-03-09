@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Reflection.Emit;
 
-namespace DBMS_Project.Data
+namespace Web.Data
 {
     public class AppIdentityDbContext : IdentityDbContext<IdentityUser>
     {

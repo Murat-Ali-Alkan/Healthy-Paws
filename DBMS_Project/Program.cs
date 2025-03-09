@@ -1,8 +1,8 @@
-using DBMS_Project.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing.Internal;
+using Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
