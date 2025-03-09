@@ -50,7 +50,6 @@ Aşağıda Healthy Paws sisteminin veritabanı ilişkilerini gösteren ER diyagr
 
    ```bash
    git clone https://github.com/Murat-Ali-Alkan/Healthy-Paws.git
-   cd healthy-paws
    ```
 
 2. **Docker Kullanarak Uygulamayı Başlatın:**
