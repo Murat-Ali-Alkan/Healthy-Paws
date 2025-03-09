@@ -56,6 +56,7 @@ Aşağıda Healthy Paws sisteminin veritabanı ilişkilerini gösteren ER diyagr
 2. **Docker Kullanarak Uygulamayı Başlatın:**
 
    - Docker ve Docker Compose'un sisteminizde yüklü olduğundan emin olun.
+   - Docker Compose dosyasının bulunduğu dosya dizininde olduğunuzdan emin olun.
    - Aşağıdaki komutu çalıştırarak tüm servisleri başlatın:
      ```bash
      docker-compose up -d --build
